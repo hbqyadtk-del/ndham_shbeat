@@ -6,17 +6,19 @@
 <title>نظام إدارة شركة شعبيات الحارة</title>
 <style>
   :root{
+    /* تم تعديل المتغيرات لتتوافق مع المخطط اللوني المفضل: Cyan و White */
     --bg:#ffffff;           /* خلفية عامة - أبيض */
-    --card:#40e0d0;         /* خلفية البطاقات - سماوي */
+    --card:#e0f7fa;         /* خلفية البطاقات - سماوي فاتح */
     --text:#000000;         /* لون النص على الخلفية البيضاء - أسود */
     --text-on-accent:#000000; /* لون النص على الخلفية السماوية - أسود */
-    --accent:#0066cc;       /* لون بارز (سماوي داكن) للأزرار والروابط */
+    --accent:#00bcd4;       /* لون بارز (سماوي) للأزرار والروابط */
     --muted:#888888;        /* ألوان مطفئة */
-    --danger:#ff0000;       /* لون الخطأ (اختياري، يمكن إزالته لاحقاً) */
-    --good:#00aa00;         /* لون النجاح (اختياري، يمكن إزالته لاحقاً) */
-    --glass: rgba(0, 102, 204, 0.1); /* تأثير زجاجي مع اللون السماوي */
-    --table-border:#0066cc; /* حدود الجداول - سماوي داكن */
-    --hover-bg: #e0f7fa;    /* لون الخلفية عند تمرير الماوس - سماوي فاتح */
+    --danger:#f44336;       /* لون الخطأ */
+    --good:#4caf50;         /* لون النجاح */
+    --glass: rgba(0, 188, 212, 0.1); /* تأثير زجاجي مع اللون السماوي */
+    --table-border:#00bcd4; /* حدود الجداول - سماوي */
+    --hover-bg: #b2ebf2;    /* لون الخلفية عند تمرير الماوس - سماوي أفتح */
+    --header-bg: linear-gradient(0deg, var(--card), var(--bg)); /* تدرج رأس الصفحة */
   }
   *{box-sizing:border-box;font-family:Arial,"Noto Naskh Arabic",sans-serif}
   body{margin:0;background:var(--bg);color:var(--text);direction:rtl}
@@ -24,7 +26,7 @@
     padding:18px;
     text-align:center;
     border-bottom:1px solid var(--table-border);
-    background:linear-gradient(0deg, var(--card), var(--bg)); /* تدرج بين السماوي والأبيض */
+    background: var(--header-bg); /* استخدام متغير محسّن */
   }
   h1{margin:0;font-size:20px;font-weight:900;color:var(--text)}
   .wrap{padding:18px;max-width:1200px;margin:0 auto}
@@ -48,7 +50,7 @@
   }
   .dash-btn:hover{
     transform:translateY(-6px);
-    background:var(--hover-bg); /* نستخدم متغير جديد للون الخلفية عند التمرير */
+    background:var(--hover-bg); /* استخدام متغير محسّن */
   }
   .dash-emoji{font-size:26px;display:block;margin-bottom:6px}
   @media(max-width:900px){ .dash-grid{grid-template-columns:repeat(2,1fr)} }
@@ -74,7 +76,7 @@
     font-weight:700;
   }
   .btn.primary{
-    background:var(--accent); /* خلفية سماوية داكنة */
+    background:var(--accent); /* خلفية سماوية */
     color:var(--bg); /* نص أبيض */
     border-color:var(--accent);
     font-weight:800;
@@ -97,10 +99,10 @@
     border:1px solid var(--table-border);
     text-align:center;
     font-size:13px;
-    color:var(--text-on-accent); /* نص أسود أو أبيض حسب الخلفية */
+    color:var(--text-on-accent); /* نص أسود */
   }
   th{
-    background:var(--accent); /* خلفية سماوية داكنة */
+    background:var(--accent); /* خلفية سماوية */
     color:var(--bg); /* نص أبيض */
     font-weight:800;
   }
@@ -108,7 +110,7 @@
     padding:8px;
     border-radius:8px;
     border:1px solid var(--table-border);
-    background:var(--card); /* خلفية سماوية */
+    background:var(--card); /* خلفية سماوية فاتحة */
     margin-bottom:8px;
     color:var(--text-on-accent); /* نص أسود */
   }
@@ -149,14 +151,14 @@
     z-index:80;
   }
   tr.clickable:hover{
-    background:var(--hover-bg); /* نستخدم متغير جديد للون الخلفية عند التمرير */
+    background:var(--hover-bg); /* استخدام متغير محسّن */
     cursor:pointer;
   }
   .badge{
     display:inline-block;
     padding:4px 8px;
     border-radius:6px;
-    background:var(--accent); /* خلفية سماوية داكنة */
+    background:var(--accent); /* خلفية سماوية */
     color:var(--bg); /* نص أبيض */
     font-weight:700;
   }
@@ -169,30 +171,32 @@
   }
   .logo-small{height:48px}
   .muted-tiny{font-size:11px;color:var(--muted)}
-
   /* تعديلات إضافية لتحسين الاتساق */
   #clientSelector div[style*="background:#111111"] {
-    background: var(--card) !important; /* خلفية سماوية للـ Modal */
+    background: var(--card) !important; /* خلفية سماوية فاتحة للـ Modal */
     color: var(--text-on-accent) !important; /* نص أسود */
     border: 1px solid var(--table-border) !important;
   }
   #clientSelector h3[style*="color:var(--accent)"] {
-    color: var(--accent) !important; /* لون السماوي الداكن للعنوان */
+    color: var(--accent) !important; /* لون السماوي للعنوان */
   }
-
   /* تعديل خلفية قسم تفاصيل الكرتون في صفحة الأصناف */
   #inventoryPage .right-col > div[style*="background:#151515"] {
-    background: var(--hover-bg) !important; /* سماوي فاتح */
+    background: var(--hover-bg) !important; /* سماوي أفتح */
     border: 1px solid var(--table-border) !important;
     color: var(--text) !important;
   }
-
   /* تعديل خلفية عناوين الجداول في صفحة المستندات */
   #clientDocsPage table thead tr[style*="background:#1a1a1a"] {
-    background: var(--accent) !important; /* سماوي داكن */
+    background: var(--accent) !important; /* سماوي */
     color: var(--bg) !important; /* نص أبيض */
   }
-
+  /* تحسين التوافق مع شاشات الموبايل للجداول */
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
 </style>
 </head>
 <body>
@@ -254,7 +258,7 @@
         <input id="inv_cat" type="text" placeholder="مثال: مشروبات، وجبات، حلويات">
         <label>اسم المنتج</label>
         <input id="inv_prod" type="text" placeholder="مثال: مياه معدنية 500 مل">
-        <div style="margin-top:12px;padding:10px;background:var(--hover-bg);border-radius:8px;border:1px solid var(--table-border);"> <!-- تعديل هنا -->
+        <div style="margin-top:12px;padding:10px;background:var(--hover-bg);border-radius:8px;border:1px solid var(--table-border);">
           <div style="font-weight:700;color:var(--accent);margin-bottom:8px;">📦 تفاصيل الكرتون</div>
           <label>كمية الوحدات داخل الكرتون الواحد</label>
           <input id="inv_unitsPerCarton" type="number" min="1" value="12" placeholder="مثال: 12">
@@ -295,7 +299,6 @@
       <div class="col right-col">
         <h4>إضافة / تعديل سجل</h4>
         <label>الاسم</label><input id="c_name" type="text">
-        <label>رقم الهوية</label><input id="c_idnum" type="text">
         <label>الهاتف</label><input id="c_phone" type="text">
         <label>البريد الإلكتروني</label><input id="c_email" type="text">
         <label>العنوان</label><input id="c_address" type="text">
@@ -303,9 +306,9 @@
         <select id="c_type"><option value="عميل">عميل</option><option value="تاجر">تاجر</option><option value="مورد">مورد</option></select>
         <label>ملاحظات</label><textarea id="c_notes" rows="2"></textarea>
         <div style="margin-top:8px;display:flex;gap:8px">
-          <button class="btn primary" onclick="saveClient()">حفظ</button>
-          <button class="btn" onclick="clearClientForm()">مسح</button>
-          <button class="btn" onclick="exportClients()">تصدير JSON</button>
+          <button class="btn primary" onclick="saveClient()">💾 حفظ</button>
+          <button class="btn" onclick="clearClientForm()">🗑️ مسح</button>
+          <button class="btn" onclick="exportClients()">📤 تصدير JSON</button>
         </div>
       </div>
     </div>
@@ -324,7 +327,7 @@
           <div style="font-weight:800">قائمة الأصناف و أنواعها</div>
           <div style="display:flex;gap:8px;align-items:center">
             <input id="prodSearch" class="search" placeholder="ابحث..." style="width:240px" oninput="renderProductsTable()">
-            <button class="btn" onclick="renderProductsTable()">تحديث</button>
+            <button class="btn" onclick="renderProductsTable()">🔄 تحديث</button>
           </div>
         </div>
         <div style="margin-top:8px">
@@ -380,8 +383,8 @@
     </div>
     <div style="margin-top:8px;display:flex;gap:8px;align-items:center">
       <input id="invFilter" class="search" placeholder="ابحث باسم العميل أو رقم الفاتورة..." oninput="renderInvoicesView()">
-      <button class="btn" onclick="renderInvoicesView()">عرض</button>
-      <button class="btn" onclick="exportAllInvoices()">تصدير كل الفواتير (JSON)</button>
+      <button class="btn" onclick="renderInvoicesView()">🔍 عرض</button>
+      <button class="btn" onclick="exportAllInvoices()">📤 تصدير كل الفواتير (JSON)</button>
     </div>
     <div id="invoicesContainer" style="margin-top:10px"></div>
   </div>
@@ -416,7 +419,7 @@
         <label style="margin-top:12px">قائمة المنتجات</label>
         <div style="display:flex;gap:8px;margin-top:6px;align-items:center">
           <input id="docProdSearch" class="search" placeholder="ابحث عن منتج..." style="flex:1" oninput="renderDocProductsTable()">
-          <button class="btn" onclick="renderDocProductsTable()" style="padding:6px 10px;font-size:13px">تحديث</button>
+          <button class="btn" onclick="renderDocProductsTable()" style="padding:6px 10px;font-size:13px">🔄 تحديث</button>
         </div>
         <div style="margin-top:8px;overflow:auto;max-height:200px">
           <div id="docProductsTable"></div>
@@ -436,10 +439,10 @@
         </table>
         <div style="margin-top:8px;font-weight:800">الإجمالي: <span id="docGrandTotal">0.00</span></div>
         <div style="margin-top:10px;display:flex;gap:8px">
-          <button class="btn primary" onclick="addDocument()">حفظ المستند</button>
-          <button class="btn" onclick="clearDocForm()">مسح</button>
-          <button class="btn" onclick="printClientDocuments()">طباعة</button>
-          <button class="btn" onclick="exportClientDocsCSV()">تصدير CSV</button>
+          <button class="btn primary" onclick="addDocument()">💾 حفظ المستند</button>
+          <button class="btn" onclick="clearDocForm()">🗑️ مسح</button>
+          <button class="btn" onclick="printClientDocuments()">🖨️ طباعة</button>
+          <button class="btn" onclick="exportClientDocsCSV()">📤 تصدير CSV</button>
         </div>
       </div>
       <div class="col" style="flex:1">
@@ -447,7 +450,7 @@
         <input id="docSearch" class="search" placeholder="ابحث..." oninput="renderDocumentsTable()">
         <div style="margin-top:8px;overflow:auto">
           <table>
-            <thead><tr style="background:var(--accent); color: var(--bg);"><th>النوع</th><th>الاسم</th><th>المنتجات</th><th>المبلغ</th><th>التاريخ</th><th>إجراء</th></tr></thead> <!-- تعديل هنا -->
+            <thead><tr style="background:var(--accent); color: var(--bg);"><th>النوع</th><th>الاسم</th><th>المنتجات</th><th>المبلغ</th><th>التاريخ</th><th>إجراء</th></tr></thead>
             <tbody id="docsTbody"></tbody>
           </table>
         </div>
@@ -488,8 +491,8 @@
         <div class="small">التاريخ:</div>
         <input type="date" id="reportDay" value="">
         <div style="margin-top:8px">
-          <button class="btn primary" onclick="generateDailyReport()">عرض تقرير اليوم</button>
-          <button class="btn" onclick="exportDailyCSV()">تصدير CSV</button>
+          <button class="btn primary" onclick="generateDailyReport()">📊 عرض تقرير اليوم</button>
+          <button class="btn" onclick="exportDailyCSV()">📤 تصدير CSV</button>
         </div>
         <div id="dailyReport" style="margin-top:8px"></div>
       </div>
@@ -498,8 +501,8 @@
         <div class="small">اختر شهر</div>
         <input type="month" id="reportMonth" value="">
         <div style="margin-top:8px">
-          <button class="btn primary" onclick="generateMonthlyReport()">عرض تقرير الشهر</button>
-          <button class="btn" onclick="exportMonthlyCSV()">تصدير CSV</button>
+          <button class="btn primary" onclick="generateMonthlyReport()">📊 عرض تقرير الشهر</button>
+          <button class="btn" onclick="exportMonthlyCSV()">📤 تصدير CSV</button>
         </div>
         <div id="monthlyReport" style="margin-top:8px"></div>
       </div>
@@ -507,10 +510,10 @@
   </div>
   <!-- Client selector modal -->
   <div id="clientSelector" style="display:none;position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:90">
-    <div style="background:var(--card);padding:12px;border-radius:8px;box-shadow:0 16px 48px var(--glass);min-width:320px;color:var(--text-on-accent);border:1px solid var(--table-border)"> <!-- تعديل هنا -->
+    <div style="background:var(--card);padding:12px;border-radius:8px;box-shadow:0 16px 48px var(--glass);min-width:320px;color:var(--text-on-accent);border:1px solid var(--table-border)">
       <div style="display:flex;justify-content:space-between;align-items:center">
         <h3 style="margin:0;color:var(--accent)">اختر العميل</h3>
-        <button class="btn" onclick="closeClientSelector()">إغلاق</button>
+        <button class="btn" onclick="closeClientSelector()">❌ إغلاق</button>
       </div>
       <div style="margin-top:8px">
         <input id="selectorSearch" class="search" placeholder="ابحث..." oninput="renderClientSelectorList()">
@@ -547,9 +550,22 @@ function saveAll(){
   localStorage.setItem('expenses', JSON.stringify(expenses));
   localStorage.setItem('salesAgents', JSON.stringify(salesAgents));
 }
+// تحسين دالة escapeHtml لمنع XSS بشكل أفضل
 function escapeHtml(s){
-  if(s===undefined||s===null) return '';
-  return String(s).replace(/[&<>"'`]/g,m=>({'&':'&amp;','<':'<','>':'>','"':'&quot;',"'":'&#39;','`':'&#96;'}[m]));
+    if(s === undefined || s === null) return '';
+    const map = {
+        '&': '&amp;',
+        '<': '<',
+        '>': '>',
+        '"': '&quot;',
+        "'": '&#39;',
+        '/': '&#x2F;',
+        '`': '&#x60;',
+        '=': '&#x3D;'
+    };
+    return String(s).replace(/[&<>"'`=\/]/g, function (s) {
+        return map[s];
+    });
 }
 function uid(prefix='id'){
   return prefix + '-' + Date.now() + '-' + Math.random().toString(36).slice(2,6);
@@ -577,10 +593,10 @@ const svgLogo = `<svg xmlns='http://www.w3.org/2000/svg' width='420' height='80'
   <rect rx='10' width='420' height='80' fill='white'/>
   <g transform='translate(12,12)'>
     <circle cx='24' cy='26' r='22' fill='url(#g)' stroke='#b37a3b' stroke-width='1'/>
-    <text x='60' y='36' font-family='Arial' font-size='20' fill='#b37a3b' font-weight='700'>Abo Alfuraq Company</text>
+    <text x='60' y='36' font-family='Arial' font-size='20' fill='#b37a3b' font-weight='700'>شعبيات الحارة</text>
   </g>
 </svg>`;
-const logoDataUrl = 'data:image/svg+xml;utf8,' + encodeURIComponent(svgLogo);
+const logoDataUrl = 'image/svg+xml;utf8,' + encodeURIComponent(svgLogo);
 /* ===========================
    Navigation
    =========================== */
@@ -717,8 +733,8 @@ function renderInventory(){
         <td>السعر: ${item.unitPrice.toFixed(2)}</td>
         <td>${item.cartonCount} (${totalUnits} وحدة)</td>
         <td>
-          <button class="btn" onclick="editInventoryItem('${escapeHtml(cat.name)}','${escapeHtml(prodName)}')">تعديل</button>
-          <button class="btn" onclick="deleteInventoryItem('${escapeHtml(cat.name)}','${escapeHtml(prodName)}')">حذف</button>
+          <button class="btn" onclick="editInventoryItem('${escapeHtml(cat.name)}','${escapeHtml(prodName)}')">✏️ تعديل</button>
+          <button class="btn" onclick="deleteInventoryItem('${escapeHtml(cat.name)}','${escapeHtml(prodName)}')">🗑️ حذف</button>
         </td>
       `;
       tbody.appendChild(row);
@@ -787,7 +803,7 @@ function renderProductsTable(){
     if(rows.length > 0){
       hasResults = true;
       const headerRow = document.createElement('tr');
-      headerRow.innerHTML = `<td colspan="6" style="background:var(--accent); color: var(--bg); font-weight:800;text-align:right;">${escapeHtml(cat.name)}</td>`; // تعديل هنا
+      headerRow.innerHTML = `<td colspan="6" style="background:var(--accent); color: var(--bg); font-weight:800;text-align:right;">${escapeHtml(cat.name)}</td>`;
       tbody.appendChild(headerRow);
       rows.forEach(r => tbody.appendChild(r));
     }
@@ -874,7 +890,7 @@ function renderCart(){
       <td>${it.sellType === 'unit' ? 'وحدة' : 'كرتون'}</td>
       <td>${price.toFixed(2)}</td>
       <td>${subtotal.toFixed(2)}</td>
-      <td><button class="btn" onclick="removeCartItem(${idx})">حذف</button></td>
+      <td><button class="btn" onclick="removeCartItem(${idx})">🗑️ حذف</button></td>
     `;
     body.appendChild(tr);
   });
@@ -974,7 +990,7 @@ function finalizeInvoice(){
    =========================== */
 function printInvoice(id){
   const inv = invoices.find(x=>x.id===id); if(!inv) return;
-  const companyName='شركة شعبيات الحارة ';
+  const companyName='شعبيات الحارة';
   let paymentsHtml = '';
   const paid = sumPaymentsOfInvoice(inv);
   (inv.payments||[]).forEach(p=> paymentsHtml += `<tr><td>${toDateString(p.datetime)}</td><td>${p.id}</td><td>${p.amount}</td><td>${escapeHtml(p.method||'')}</td></tr>`);
@@ -1033,16 +1049,16 @@ function renderClients(){
     if(q && !((c.name||'').toLowerCase().includes(q) || (c.phone||'').includes(q) || (c.type||'').toLowerCase().includes(q))) return;
     const d = document.createElement('div'); d.className='client-card';
     d.innerHTML = `<div style="font-weight:800">${escapeHtml(c.name)} <span class="small">(${escapeHtml(c.type||'عميل')})</span></div>
-      <div>الهاتف: ${escapeHtml(c.phone||'-')} — الهوية: ${escapeHtml(c.idnum||'-')}</div>
+      <div>الهاتف: ${escapeHtml(c.phone||'-')}  </div>
       <div>البريد: ${escapeHtml(c.email||'-')}</div>
       <div>العنوان: ${escapeHtml(c.address||'-')}</div>
       <div class="small">ملاحظات: ${escapeHtml(c.notes||'-')}</div>
       <div style="margin-top:8px;display:flex;gap:8px">
-        <button class="btn" onclick="pickClient(${i})">اختر</button>
-        <button class="btn" onclick="editClient(${i})">تعديل</button>
-        <button class="btn" onclick="deleteClient(${i})">حذف</button>
-        <button class="btn" onclick="openClientAccount(${i})">عرض الحساب</button>
-        <button class="btn" onclick="openSupplierAccount(${i})">عرض مورد (لو كان)</button>
+        <button class="btn" onclick="pickClient(${i})">اختيار</button>
+        <button class="btn" onclick="editClient(${i})">✏️ تعديل</button>
+        <button class="btn" onclick="deleteClient(${i})">🗑️ حذف</button>
+        <button class="btn" onclick="openClientAccount(${i})">حساب العميل</button>
+        <button class="btn" onclick="openSupplierAccount(${i})">حساب المورد</button>
       </div>`;
     area.appendChild(d);
   });
@@ -1052,7 +1068,6 @@ let editingClientIndex = -1;
 function saveClient(){
   const obj = {
     name: (document.getElementById('c_name').value||'').trim(),
-    idnum: (document.getElementById('c_idnum').value||'').trim(),
     phone: (document.getElementById('c_phone').value||'').trim(),
     email: (document.getElementById('c_email').value||'').trim(),
     address: (document.getElementById('c_address').value||'').trim(),
@@ -1073,7 +1088,6 @@ function editClient(i){
   const c = clients[i]; if(!c) return;
   editingClientIndex = i;
   document.getElementById('c_name').value = c.name||'';
-  document.getElementById('c_idnum').value = c.idnum||'';
   document.getElementById('c_phone').value = c.phone||'';
   document.getElementById('c_email').value = c.email||'';
   document.getElementById('c_address').value = c.address||'';
@@ -1088,7 +1102,7 @@ function deleteClient(i){
   renderClients();
 }
 function clearClientForm(){
-  ['c_name','c_idnum','c_phone','c_email','c_address','c_notes'].forEach(id=>document.getElementById(id).value='');
+  ['c_name', 'c_phone','c_email','c_address','c_notes'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('c_type').value='عميل';
   editingClientIndex=-1;
 }
@@ -1114,7 +1128,7 @@ function renderInvoicesView(){
   function buildTable(title, list){
     const wrapper = document.createElement('div'); wrapper.style.marginTop='10px';
     const h = document.createElement('div'); h.style.display='flex'; h.style.justifyContent='space-between'; h.style.alignItems='center';
-    h.innerHTML = `<div style="font-weight:800">${title} (${list.length})</div><div style="display:flex;gap:8px"><button class="btn" onclick="printInvoicesSection('${title.replace(/\s+/g,'_')}')">طباعة</button><button class="btn" onclick="downloadText('${title.replace(/\s+/g,'_')}_export.json', JSON.stringify(${JSON.stringify(list)},null,2))">تصدير JSON</button></div>`;
+    h.innerHTML = `<div style="font-weight:800">${title} (${list.length})</div><div style="display:flex;gap:8px"><button class="btn" onclick="printInvoicesSection('${title.replace(/\s+/g,'_')}')">🖨️ طباعة</button><button class="btn" onclick="downloadText('${title.replace(/\s+/g,'_')}_export.json', JSON.stringify(${JSON.stringify(list)},null,2))">📤 تصدير JSON</button></div>`;
     wrapper.appendChild(h);
     const table = document.createElement('table');
     table.innerHTML = `<thead><tr><th>العميل</th><th>النوع</th><th>رقم الفاتورة</th><th>التاريخ</th><th>الإجمالي</th><th>المسلم</th><th>الباقي</th><th>طريقة الدفع</th><th>الحالة</th><th>إجراء</th></tr></thead><tbody></tbody>`;
@@ -1139,9 +1153,9 @@ function renderInvoicesView(){
         <td>${inv.isModified ? '<span style="color:#ff5555;font-weight:800">تم التعديل</span>' : '—'}</td>
         <td style="display:flex;gap:6px;justify-content:center">
           <button class="btn" onclick="viewInvoice('${inv.id}')">عرض</button>
-          <button class="btn" onclick="printInvoice('${inv.id}')">طباعة</button>
-          <button class="btn" onclick="editInvoice('${inv.id}')">تعديل</button>
-          <button class="btn" onclick="deleteInvoice('${inv.id}')">حذف</button>
+          <button class="btn" onclick="printInvoice('${inv.id}')">🖨️ طباعة</button>
+          <button class="btn" onclick="editInvoice('${inv.id}')">✏️ تعديل</button>
+          <button class="btn" onclick="deleteInvoice('${inv.id}')">🗑️ حذف</button>
         </td>`;
       tb.appendChild(tr);
     });
@@ -1248,12 +1262,12 @@ function openClientAccount(index){
   clientInvoices.forEach(inv=>{
     const paid = sumPaymentsOfInvoice(inv);
     const rem = (inv.total||0) - paid;
-    html += `<tr><td>${escapeHtml(inv.id)}</td><td>${toDateString(inv.datetime)}</td><td>${(inv.total||0).toFixed(2)}</td><td>${paid.toFixed(2)}</td><td>${rem.toFixed(2)}</td><td><button class="btn" onclick="printInvoice('${inv.id}')">طباعة</button></td></tr>`;
+    html += `<tr><td>${escapeHtml(inv.id)}</td><td>${toDateString(inv.datetime)}</td><td>${(inv.total||0).toFixed(2)}</td><td>${paid.toFixed(2)}</td><td>${rem.toFixed(2)}</td><td><button class="btn" onclick="printInvoice('${inv.id}')">🖨️ طباعة</button></td></tr>`;
   });
   html += `</tbody></table>`;
   const clientReceipts = receipts.filter(r=> r.clientName === client.name);
   html += `<h4 style="margin-top:10px">سندات القبض (دفعات)</h4><table><thead><tr><th>رقم السند</th><th>التاريخ</th><th>المبلغ</th><th>مرتبط بفاتورة</th><th>طريقة</th><th>إجراء</th></tr></thead><tbody>`;
-  clientReceipts.forEach(r=> html += `<tr><td>${escapeHtml(r.id)}</td><td>${toDateString(r.datetime)}</td><td>${r.amount}</td><td>${escapeHtml(r.invoiceId || '-')}</td><td>${escapeHtml(r.method||'-')}</td><td><button class="btn" onclick="printSingleDocument('${r.id}')">طباعة</button></td></tr>`);
+  clientReceipts.forEach(r=> html += `<tr><td>${escapeHtml(r.id)}</td><td>${toDateString(r.datetime)}</td><td>${r.amount}</td><td>${escapeHtml(r.invoiceId || '-')}</td><td>${escapeHtml(r.method||'-')}</td><td><button class="btn" onclick="printSingleDocument('${r.id}')">🖨️ طباعة</button></td></tr>`);
   html += `</tbody></table>`;
   document.getElementById('accountContent').innerHTML = html;
   openPage('clientAccountPage');
@@ -1272,11 +1286,11 @@ function openSupplierAccount(index){
   html += `<h4>فواتير المورد</h4><table><thead><tr><th>رقم</th><th>التاريخ</th><th>الإجمالي</th><th>المدفوع</th><th>المتبقي</th><th>إجراء</th></tr></thead><tbody>`;
   suppInvoices.forEach(inv => {
     const paid = sumPaymentsOfInvoice(inv);
-    html += `<tr><td>${escapeHtml(inv.id)}</td><td>${toDateString(inv.datetime)}</td><td>${(inv.total||0).toFixed(2)}</td><td>${paid.toFixed(2)}</td><td>${((inv.total||0)-paid).toFixed(2)}</td><td><button class="btn" onclick="printInvoice('${inv.id}')">طباعة</button></td></tr>`;
+    html += `<tr><td>${escapeHtml(inv.id)}</td><td>${toDateString(inv.datetime)}</td><td>${(inv.total||0).toFixed(2)}</td><td>${paid.toFixed(2)}</td><td>${((inv.total||0)-paid).toFixed(2)}</td><td><button class="btn" onclick="printInvoice('${inv.id}')">🖨️ طباعة</button></td></tr>`;
   });
   html += `</tbody></table>`;
   html += `<h4 style="margin-top:10px">سندات الصرف</h4><table><thead><tr><th>رقم السند</th><th>التاريخ</th><th>المبلغ</th><th>طريقة</th><th>إجراء</th></tr></thead><tbody>`;
-  suppExpenses.forEach(e => html += `<tr><td>${escapeHtml(e.id)}</td><td>${toDateString(e.datetime)}</td><td>${e.amount}</td><td>${escapeHtml(e.method||'-')}</td><td><button class="btn" onclick="printSingleDocument('${e.id}')">طباعة</button></td></tr>`);
+  suppExpenses.forEach(e => html += `<tr><td>${escapeHtml(e.id)}</td><td>${toDateString(e.datetime)}</td><td>${e.amount}</td><td>${escapeHtml(e.method||'-')}</td><td><button class="btn" onclick="printSingleDocument('${e.id}')">🖨️ طباعة</button></td></tr>`);
   html += `</tbody></table>`;
   document.getElementById('supplierAccountContent').innerHTML = html;
   openPage('supplierAccountPage');
@@ -1332,7 +1346,7 @@ function renderDocProductsTable(){
     if (rows.length > 0) {
       hasResults = true;
       const headerRow = document.createElement('tr');
-      headerRow.innerHTML = `<td colspan="6" style="background:var(--accent); color: var(--bg); font-weight:700;text-align:right;">${escapeHtml(catName)}</td>`; // تعديل هنا
+      headerRow.innerHTML = `<td colspan="6" style="background:var(--accent); color: var(--bg); font-weight:700;text-align:right;">${escapeHtml(catName)}</td>`;
       tbody.appendChild(headerRow);
       rows.forEach(row => tbody.appendChild(row));
     }
@@ -1416,8 +1430,8 @@ function renderDocCart(){
     tr.innerHTML = `<td style="text-align:left">${escapeHtml(it.prodName)} <div class="small">${escapeHtml(it.catName)}</div></td>
       <td>${displayQty}</td>
       <td>${price.toFixed(2)}</td><td>${subtotal.toFixed(2)}</td>
-      <td><button class="btn" onclick="docEditItem(${idx})">تعديل</button></td>
-      <td><button class="btn" onclick="docRemoveItem(${idx})">حذف</button></td>`;
+      <td><button class="btn" onclick="docEditItem(${idx})">✏️ تعديل</button></td>
+      <td><button class="btn" onclick="docRemoveItem(${idx})">🗑️ حذف</button></td>`;
     body.appendChild(tr);
   });
   document.getElementById('docGrandTotal').innerText = total.toFixed(2);
@@ -1536,8 +1550,10 @@ function clearDocForm(){
   document.getElementById('docProdSearch').value = '';
   document.getElementById('docReason').value = '';
   document.getElementById('docPaymentMethod').value = 'نقدا';
+  // تفريغ السلة
   docCart = [];
   renderDocCart();
+  // تحديث جدول المنتجات بعد التفريغ
   renderDocProductsTable();
   onDocTypeChange();
 }
@@ -1576,15 +1592,15 @@ function renderDocumentsTable(){
     const tr = document.createElement('tr');
     tr.innerHTML = `<td>${escapeHtml(d.type)}</td><td>${escapeHtml(d.clientName)}</td><td>${escapeHtml(productsText)}</td><td>${d.amount}</td><td>${toDateString(d.datetime)}</td>
       <td>
-        <button class="btn" onclick="printSingleDocument('${d.id}')">طباعة</button>
-        <button class="btn" onclick="deleteDocument('${d.id}')">حذف</button>
+        <button class="btn" onclick="printSingleDocument('${d.id}')">🖨️ طباعة</button>
+        <button class="btn" onclick="deleteDocument('${d.id}')">🗑️ حذف</button>
       </td>`;
     tbody.appendChild(tr);
   });
 }
 function printSingleDocument(id){
   const d = documents.find(x=>x.id===id); if(!d) return;
-  const company = ' شعبيات الحارة';
+  const company = 'شعبيات الحارة';
   const productsText = (d.products || []).map(p => p.sellType === 'unit' ? `${p.prodName} (${p.qty} وحدة)` : `${p.prodName} (${p.qty} كرتون)`).join(', ') || '-';
   const html = `<div style="direction:rtl;font-family:Arial;padding:10px;max-width:700px;margin:10px auto;border:1px solid #ddd;border-radius:8px">
     <div style="display:flex;justify-content:space-between"><div style="font-weight:900;color:#b37a3b"><img src="${logoDataUrl}" style="height:36px;vertical-align:middle" /> ${company}</div><div>تاريخ: ${toDateString(d.datetime)}</div></div>
@@ -1617,8 +1633,7 @@ function exportClientDocsCSV(){
     const productsText = (d.products || []).map(p => p.sellType === 'unit' ? `${p.prodName}(${p.qty}u)` : `${p.prodName}(${p.qty}c)`).join('; ');
     rows.push([d.type,d.clientName,productsText,d.amount,toDateString(d.datetime),d.invoiceId||'',d.method||'']);
   });
-  const csv = rows.map(r => r.map(c => `"${String(c||'').replace(/"/g,'""')}"`).join(',')).join('
-');
+  const csv = rows.map(r => r.map(c => `"${String(c||'').replace(/"/g,'""')}"`).join(',')).join('\n');
   downloadText('client_documents.csv', csv);
 }
 /* ===========================
@@ -1640,8 +1655,7 @@ function exportDailyCSV(){
   if(!data){ alert('اعرض التقرير أولاً'); return; }
   const rows = [['رقم الفاتورة','العميل','التاريخ','الإجمالي','المدفوع']];
   data.rows.forEach(i=> rows.push([i.id,i.client.name,toDateString(i.datetime),i.total,sumPaymentsOfInvoice(i)]));
-  const csv = rows.map(r => r.map(c=>`"${String(c||'').replace(/"/g,'""')}"`).join(',')).join('
-');
+  const csv = rows.map(r => r.map(c=>`"${String(c||'').replace(/"/g,'""')}"`).join(',')).join('\n');
   downloadText(`daily_report_${data.date}.csv`, csv);
 }
 function generateMonthlyReport(){
@@ -1664,8 +1678,7 @@ function exportMonthlyCSV(){
   if(!data){ alert('اعرض التقرير أولاً'); return; }
   const rows = [['رقم الفاتورة','العميل','التاريخ','الإجمالي','المدفوع']];
   data.rows.forEach(i=> rows.push([i.id,i.client.name,toDateString(i.datetime),i.total,sumPaymentsOfInvoice(i)]));
-  const csv = rows.map(r => r.map(c=>`"${String(c||'').replace(/"/g,'""')}"`).join(',')).join('
-');
+  const csv = rows.map(r => r.map(c=>`"${String(c||'').replace(/"/g,'""')}"`).join(',')).join('\n');
   downloadText(`monthly_report_${data.month}.csv`, csv);
 }
 /* ===========================
