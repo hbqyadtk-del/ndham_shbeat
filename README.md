@@ -6,15 +6,17 @@
 <title>نظام إدارة شركة شعبيات الحارة</title>
 <style>
   :root{
-    --bg:#000000;
-    --card:#111111;
-    --text:#ffffff;
-    --accent:#40e0d0;
-    --muted:#bbbbbb;
-    --danger:#ff5555;
-    --good:#40e0d0;
-    --glass: rgba(64, 224, 208, 0.08);
-    --table-border:#40e0d0;
+    --bg:#ffffff;           /* خلفية عامة - أبيض */
+    --card:#40e0d0;         /* خلفية البطاقات - سماوي */
+    --text:#000000;         /* لون النص على الخلفية البيضاء - أسود */
+    --text-on-accent:#000000; /* لون النص على الخلفية السماوية - أسود */
+    --accent:#0066cc;       /* لون بارز (سماوي داكن) للأزرار والروابط */
+    --muted:#888888;        /* ألوان مطفئة */
+    --danger:#ff0000;       /* لون الخطأ (اختياري، يمكن إزالته لاحقاً) */
+    --good:#00aa00;         /* لون النجاح (اختياري، يمكن إزالته لاحقاً) */
+    --glass: rgba(0, 102, 204, 0.1); /* تأثير زجاجي مع اللون السماوي */
+    --table-border:#0066cc; /* حدود الجداول - سماوي داكن */
+    --hover-bg: #e0f7fa;    /* لون الخلفية عند تمرير الماوس - سماوي فاتح */
   }
   *{box-sizing:border-box;font-family:Arial,"Noto Naskh Arabic",sans-serif}
   body{margin:0;background:var(--bg);color:var(--text);direction:rtl}
@@ -22,7 +24,7 @@
     padding:18px;
     text-align:center;
     border-bottom:1px solid var(--table-border);
-    background:linear-gradient(0deg, #0a0a0a, #111111);
+    background:linear-gradient(0deg, var(--card), var(--bg)); /* تدرج بين السماوي والأبيض */
   }
   h1{margin:0;font-size:20px;font-weight:900;color:var(--text)}
   .wrap{padding:18px;max-width:1200px;margin:0 auto}
@@ -42,11 +44,11 @@
     text-align:center;
     box-shadow:0 8px 30px var(--glass);
     transition:transform .12s;
-    color:var(--text);
+    color:var(--text-on-accent);
   }
   .dash-btn:hover{
     transform:translateY(-6px);
-    background:#1a1a1a;
+    background:var(--hover-bg); /* نستخدم متغير جديد للون الخلفية عند التمرير */
   }
   .dash-emoji{font-size:26px;display:block;margin-bottom:6px}
   @media(max-width:900px){ .dash-grid{grid-template-columns:repeat(2,1fr)} }
@@ -58,7 +60,7 @@
     border-radius:10px;
     margin:16px 0;
     box-shadow:0 10px 30px var(--glass);
-    color:var(--text);
+    color:var(--text-on-accent);
   }
   .page.active{display:block}
   .flex{display:flex;gap:8px;align-items:center}
@@ -66,14 +68,14 @@
     padding:8px 10px;
     border-radius:8px;
     border:1px solid var(--table-border);
-    background:var(--card);
-    color:var(--text);
+    background:var(--bg); /* خلفية بيضاء */
+    color:var(--text); /* نص أسود */
     cursor:pointer;
     font-weight:700;
   }
   .btn.primary{
-    background:var(--accent);
-    color:#000000;
+    background:var(--accent); /* خلفية سماوية داكنة */
+    color:var(--bg); /* نص أبيض */
     border-color:var(--accent);
     font-weight:800;
   }
@@ -82,8 +84,8 @@
     border:1px solid var(--table-border);
     width:100%;
     border-radius:6px;
-    background:var(--card);
-    color:var(--text);
+    background:var(--bg); /* خلفية بيضاء */
+    color:var(--text); /* نص أسود */
   }
   table{
     width:100%;
@@ -95,20 +97,20 @@
     border:1px solid var(--table-border);
     text-align:center;
     font-size:13px;
-    color:var(--text);
+    color:var(--text-on-accent); /* نص أسود أو أبيض حسب الخلفية */
   }
   th{
-    background:#1a1a1a;
-    color:var(--accent);
+    background:var(--accent); /* خلفية سماوية داكنة */
+    color:var(--bg); /* نص أبيض */
     font-weight:800;
   }
   .client-card{
     padding:8px;
     border-radius:8px;
     border:1px solid var(--table-border);
-    background:#151515;
+    background:var(--card); /* خلفية سماوية */
     margin-bottom:8px;
-    color:var(--text);
+    color:var(--text-on-accent); /* نص أسود */
   }
   label{
     display:block;
@@ -122,8 +124,8 @@
     padding:8px;
     border-radius:6px;
     border:1px solid var(--table-border);
-    background:var(--card);
-    color:var(--text);
+    background:var(--bg); /* خلفية بيضاء */
+    color:var(--text); /* نص أسود */
   }
   textarea{resize:vertical}
   .muted-note{color:var(--muted);font-size:12px;margin-top:6px}
@@ -137,8 +139,8 @@
     border-radius:6px;
     border:1px solid var(--table-border);
     text-align:center;
-    background:var(--card);
-    color:var(--text);
+    background:var(--bg); /* خلفية بيضاء */
+    color:var(--text); /* نص أسود */
   }
   .overlay{
     position:fixed;
@@ -147,15 +149,15 @@
     z-index:80;
   }
   tr.clickable:hover{
-    background:#1a1a1a;
+    background:var(--hover-bg); /* نستخدم متغير جديد للون الخلفية عند التمرير */
     cursor:pointer;
   }
   .badge{
     display:inline-block;
     padding:4px 8px;
     border-radius:6px;
-    background:var(--accent);
-    color:#000000;
+    background:var(--accent); /* خلفية سماوية داكنة */
+    color:var(--bg); /* نص أبيض */
     font-weight:700;
   }
   .balance-positive{color:var(--good);font-weight:800}
@@ -167,6 +169,30 @@
   }
   .logo-small{height:48px}
   .muted-tiny{font-size:11px;color:var(--muted)}
+
+  /* تعديلات إضافية لتحسين الاتساق */
+  #clientSelector div[style*="background:#111111"] {
+    background: var(--card) !important; /* خلفية سماوية للـ Modal */
+    color: var(--text-on-accent) !important; /* نص أسود */
+    border: 1px solid var(--table-border) !important;
+  }
+  #clientSelector h3[style*="color:var(--accent)"] {
+    color: var(--accent) !important; /* لون السماوي الداكن للعنوان */
+  }
+
+  /* تعديل خلفية قسم تفاصيل الكرتون في صفحة الأصناف */
+  #inventoryPage .right-col > div[style*="background:#151515"] {
+    background: var(--hover-bg) !important; /* سماوي فاتح */
+    border: 1px solid var(--table-border) !important;
+    color: var(--text) !important;
+  }
+
+  /* تعديل خلفية عناوين الجداول في صفحة المستندات */
+  #clientDocsPage table thead tr[style*="background:#1a1a1a"] {
+    background: var(--accent) !important; /* سماوي داكن */
+    color: var(--bg) !important; /* نص أبيض */
+  }
+
 </style>
 </head>
 <body>
@@ -208,7 +234,6 @@
       <div class="muted">تقرير يومي وشهري</div>
     </div>
   </div>
-
   <!-- Inventory Page -->
   <div id="inventoryPage" class="page">
     <div style="display:flex;justify-content:space-between;align-items:center">
@@ -229,7 +254,7 @@
         <input id="inv_cat" type="text" placeholder="مثال: مشروبات، وجبات، حلويات">
         <label>اسم المنتج</label>
         <input id="inv_prod" type="text" placeholder="مثال: مياه معدنية 500 مل">
-        <div style="margin-top:12px;padding:10px;background:#151515;border-radius:8px;border:1px solid var(--table-border);">
+        <div style="margin-top:12px;padding:10px;background:var(--hover-bg);border-radius:8px;border:1px solid var(--table-border);"> <!-- تعديل هنا -->
           <div style="font-weight:700;color:var(--accent);margin-bottom:8px;">📦 تفاصيل الكرتون</div>
           <label>كمية الوحدات داخل الكرتون الواحد</label>
           <input id="inv_unitsPerCarton" type="number" min="1" value="12" placeholder="مثال: 12">
@@ -253,7 +278,6 @@
       </div>
     </div>
   </div>
-
   <!-- Clients Page -->
   <div id="clientsPage" class="page">
     <div style="display:flex;justify-content:space-between;align-items:center">
@@ -286,7 +310,6 @@
       </div>
     </div>
   </div>
-
   <!-- Sales Page -->
   <div id="salesPage" class="page">
     <div style="display:flex;justify-content:space-between;align-items:center">
@@ -347,7 +370,6 @@
       </div>
     </div>
   </div>
-
   <!-- Invoices Page -->
   <div id="invoicesPage" class="page">
     <div style="display:flex;justify-content:space-between;align-items:center">
@@ -363,7 +385,6 @@
     </div>
     <div id="invoicesContainer" style="margin-top:10px"></div>
   </div>
-
   <!-- Client Documents Page -->
   <div id="clientDocsPage" class="page">
     <div style="display:flex;justify-content:space-between;align-items:center">
@@ -426,14 +447,13 @@
         <input id="docSearch" class="search" placeholder="ابحث..." oninput="renderDocumentsTable()">
         <div style="margin-top:8px;overflow:auto">
           <table>
-            <thead><tr style="background:#1a1a1a"><th>النوع</th><th>الاسم</th><th>المنتجات</th><th>المبلغ</th><th>التاريخ</th><th>إجراء</th></tr></thead>
+            <thead><tr style="background:var(--accent); color: var(--bg);"><th>النوع</th><th>الاسم</th><th>المنتجات</th><th>المبلغ</th><th>التاريخ</th><th>إجراء</th></tr></thead> <!-- تعديل هنا -->
             <tbody id="docsTbody"></tbody>
           </table>
         </div>
       </div>
     </div>
   </div>
-
   <!-- Client Account Page -->
   <div id="clientAccountPage" class="page">
     <div style="display:flex;justify-content:space-between;align-items:center">
@@ -445,7 +465,6 @@
     <div id="accountHeader" style="margin-top:8px"></div>
     <div id="accountContent" style="margin-top:10px"></div>
   </div>
-
   <!-- Supplier Account Page -->
   <div id="supplierAccountPage" class="page">
     <div style="display:flex;justify-content:space-between;align-items:center">
@@ -457,7 +476,6 @@
     <div id="supplierAccountHeader" style="margin-top:8px"></div>
     <div id="supplierAccountContent" style="margin-top:10px"></div>
   </div>
-
   <!-- Reports Page -->
   <div id="reportsPage" class="page">
     <div style="display:flex;justify-content:space-between;align-items:center">
@@ -487,10 +505,9 @@
       </div>
     </div>
   </div>
-
   <!-- Client selector modal -->
   <div id="clientSelector" style="display:none;position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:90">
-    <div style="background:#111111;padding:12px;border-radius:8px;box-shadow:0 16px 48px var(--glass);min-width:320px;color:#ffffff;border:1px solid var(--table-border)">
+    <div style="background:var(--card);padding:12px;border-radius:8px;box-shadow:0 16px 48px var(--glass);min-width:320px;color:var(--text-on-accent);border:1px solid var(--table-border)"> <!-- تعديل هنا -->
       <div style="display:flex;justify-content:space-between;align-items:center">
         <h3 style="margin:0;color:var(--accent)">اختر العميل</h3>
         <button class="btn" onclick="closeClientSelector()">إغلاق</button>
@@ -514,12 +531,10 @@ let documents = JSON.parse(localStorage.getItem('clientDocs') || '[]');
 let receipts = JSON.parse(localStorage.getItem('receipts') || '[]');
 let expenses = JSON.parse(localStorage.getItem('expenses') || '[]');
 let salesAgents = JSON.parse(localStorage.getItem('salesAgents') || '[]');
-
 if (!salesAgents.length) {
   salesAgents = [{id:'agent-1', name:'خالد'},{id:'agent-2', name:'سالم'}];
   localStorage.setItem('salesAgents', JSON.stringify(salesAgents));
 }
-
 /* ===========================
    Helpers
    =========================== */
@@ -532,24 +547,23 @@ function saveAll(){
   localStorage.setItem('expenses', JSON.stringify(expenses));
   localStorage.setItem('salesAgents', JSON.stringify(salesAgents));
 }
-function escapeHtml(s){ 
-  if(s===undefined||s===null) return ''; 
-  return String(s).replace(/[&<>"'`]/g,m=>({'&':'&amp;','<':'<','>':'>','"':'&quot;',"'":'&#39;','`':'&#96;'}[m])); 
+function escapeHtml(s){
+  if(s===undefined||s===null) return '';
+  return String(s).replace(/[&<>"'`]/g,m=>({'&':'&amp;','<':'<','>':'>','"':'&quot;',"'":'&#39;','`':'&#96;'}[m]));
 }
-function uid(prefix='id'){ 
-  return prefix + '-' + Date.now() + '-' + Math.random().toString(36).slice(2,6); 
+function uid(prefix='id'){
+  return prefix + '-' + Date.now() + '-' + Math.random().toString(36).slice(2,6);
 }
-function toDateString(iso){ 
-  try{ return new Date(iso).toLocaleString(); }catch(e){ return iso; } 
+function toDateString(iso){
+  try{ return new Date(iso).toLocaleString(); }catch(e){ return iso; }
 }
-function sumPaymentsOfInvoice(inv){ 
-  return (inv.payments||[]).reduce((s,p)=>s + (Number(p.amount)||0),0); 
+function sumPaymentsOfInvoice(inv){
+  return (inv.payments||[]).reduce((s,p)=>s + (Number(p.amount)||0),0);
 }
-function lastPaymentMethod(inv){ 
-  const p = (inv.payments||[]).slice(-1)[0]; 
-  return p? p.method : (inv.paymentType||''); 
+function lastPaymentMethod(inv){
+  const p = (inv.payments||[]).slice(-1)[0];
+  return p? p.method : (inv.paymentType||'');
 }
-
 /* ===========================================
    Logo data URL
    =========================================== */
@@ -567,7 +581,6 @@ const svgLogo = `<svg xmlns='http://www.w3.org/2000/svg' width='420' height='80'
   </g>
 </svg>`;
 const logoDataUrl = 'data:image/svg+xml;utf8,' + encodeURIComponent(svgLogo);
-
 /* ===========================
    Navigation
    =========================== */
@@ -575,7 +588,6 @@ function openPage(id){
   document.getElementById('dashboard').style.display = (id==='dashboard') ? 'grid' : 'none';
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   if(id !== 'dashboard') document.getElementById(id).classList.add('active');
-  
   if(id === 'clientsPage') renderClients();
   else if(id === 'inventoryPage') { renderInventory(); clearInventoryForm(); }
   else if(id === 'salesPage') { renderProductsTable(); populateClientSelects(); renderCart(); }
@@ -583,7 +595,6 @@ function openPage(id){
   else if(id === 'clientDocsPage') { populateClientSelects(); renderDocProductsTable(); renderDocumentsTable(); }
 }
 openPage('dashboard');
-
 /* ===========================
    Utility Functions
    =========================== */
@@ -593,7 +604,6 @@ function downloadText(filename, text){
   a.href = URL.createObjectURL(blob); a.download = filename; document.body.appendChild(a); a.click();
   setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); },500);
 }
-
 /* ===========================
    Inventory CRUD
    =========================== */
@@ -717,14 +727,12 @@ function renderInventory(){
     cont.appendChild(wrap);
   });
 }
-
 /* ===========================
    Products for Sales
    =========================== */
-let cart = []; 
-let selectedClient = null; 
+let cart = [];
+let selectedClient = null;
 let currentClientType = null;
-
 function renderProductsTable(){
   const container = document.getElementById('productsTable');
   const q = (document.getElementById('prodSearch')||{value:''}).value.trim().toLowerCase();
@@ -764,11 +772,11 @@ function renderProductsTable(){
         <td>${item.cartonPrice.toFixed(2)} (${item.unitsPerCarton}/كرتون)</td>
         <td>${item.cartonCount} كرتون (${totalUnits} وحدة)</td>
         <td>
-          <button class="btn" style="font-size:12px;padding:4px 6px;" 
+          <button class="btn" style="font-size:12px;padding:4px 6px;"
                   onclick="addToCart('${escapeHtml(cat.name)}','${escapeHtml(prodName)}','unit')">
             + وحدة
           </button>
-          <button class="btn" style="font-size:12px;padding:4px 6px;margin-top:4px;" 
+          <button class="btn" style="font-size:12px;padding:4px 6px;margin-top:4px;"
                   onclick="addToCart('${escapeHtml(cat.name)}','${escapeHtml(prodName)}','carton')">
             + كرتون
           </button>
@@ -779,7 +787,7 @@ function renderProductsTable(){
     if(rows.length > 0){
       hasResults = true;
       const headerRow = document.createElement('tr');
-      headerRow.innerHTML = `<td colspan="6" style="background:#1a1a1a;font-weight:800;text-align:right;">${escapeHtml(cat.name)}</td>`;
+      headerRow.innerHTML = `<td colspan="6" style="background:var(--accent); color: var(--bg); font-weight:800;text-align:right;">${escapeHtml(cat.name)}</td>`; // تعديل هنا
       tbody.appendChild(headerRow);
       rows.forEach(r => tbody.appendChild(r));
     }
@@ -874,20 +882,19 @@ function renderCart(){
   renderChosenClient();
 }
 function removeCartItem(i){ cart.splice(i,1); renderCart(); }
-function clearCartConfirm(){ 
-  if(!cart.length){ alert('السلة فارغة'); return; } 
-  if(!confirm('تفريغ السلة؟')) return; 
-  cart=[]; renderCart(); 
+function clearCartConfirm(){
+  if(!cart.length){ alert('السلة فارغة'); return; }
+  if(!confirm('تفريغ السلة؟')) return;
+  cart=[]; renderCart();
 }
-
 /* ===========================
    Finalize Invoice
    =========================== */
 function finalizeInvoice(){
   if(!cart.length){ alert('السلة فارغة'); return; }
-  if(!selectedClient){ 
-    if(!confirm('لم تختَر عميلًا. الاستمرار كعميل مؤقت؟')) return; 
-    selectedClient = {name:'عميل مؤقت', type:'عميل'}; 
+  if(!selectedClient){
+    if(!confirm('لم تختَر عميلًا. الاستمرار كعميل مؤقت؟')) return;
+    selectedClient = {name:'عميل مؤقت', type:'عميل'};
   }
   // Validate stock
   for(const it of cart){
@@ -926,31 +933,31 @@ function finalizeInvoice(){
   const paymentType = document.getElementById('paymentType').value || 'نقدا';
   const notes = (document.getElementById('invoiceNotes').value||'').trim();
   const total = Number(document.getElementById('grandTotal').innerText) || 0;
-  const inv = { 
-    id: uid('INV'), 
-    datetime: now.toISOString(), 
-    client: selectedClient, 
-    products: JSON.parse(JSON.stringify(cart)), 
-    total: total, 
-    paymentType, 
-    notes, 
-    payments: [] 
+  const inv = {
+    id: uid('INV'),
+    datetime: now.toISOString(),
+    client: selectedClient,
+    products: JSON.parse(JSON.stringify(cart)),
+    total: total,
+    paymentType,
+    notes,
+    payments: []
   };
   const paidNow = Number(document.getElementById('invoicePaidAmount').value || 0);
   if(paidNow > 0){
     const pay = { id: uid('PAY'), datetime: new Date().toISOString(), amount: paidNow, method: paymentType, note: 'دفعة عند إنشاء الفاتورة' };
     inv.payments.push(pay);
-    receipts.push({ 
-      id: pay.id, 
-      type: 'سند قبض', 
-      clientIndex: null, 
-      clientName: selectedClient.name, 
-      items: inv.products.map(p=>p.prodName).join(', '), 
-      amount: paidNow, 
-      reason: 'دفعة مرتبطة بفاتورة', 
-      datetime: pay.datetime, 
-      invoiceId: inv.id, 
-      method: pay.method 
+    receipts.push({
+      id: pay.id,
+      type: 'سند قبض',
+      clientIndex: null,
+      clientName: selectedClient.name,
+      items: inv.products.map(p=>p.prodName).join(', '),
+      amount: paidNow,
+      reason: 'دفعة مرتبطة بفاتورة',
+      datetime: pay.datetime,
+      invoiceId: inv.id,
+      method: pay.method
     });
   }
   invoices.push(inv);
@@ -962,7 +969,6 @@ function finalizeInvoice(){
   renderCart(); renderProductsTable(); renderInvoicesView();
   alert('تم حفظ الفاتورة وتسجيل الدفعة (إن وجدت).');
 }
-
 /* ===========================
    Print Invoice
    =========================== */
@@ -995,7 +1001,7 @@ function printInvoice(id){
       </div>
       <div><strong>العميل:</strong> ${escapeHtml(inv.client.name||'-')} — ${escapeHtml(inv.client.type||'')}</div>
       <div style="margin-top:8px"><table><thead><tr><th>المنتج</th><th>النوع</th><th>الكمية</th><th>السعر</th><th>المجموع</th></tr></thead><tbody>`;
-  inv.products.forEach(p=>{ 
+  inv.products.forEach(p=>{
     let qtyDisplay, priceDisplay;
     if(p.sellType === 'unit'){
       qtyDisplay = `${p.qty} وحدة`;
@@ -1004,7 +1010,7 @@ function printInvoice(id){
       qtyDisplay = `${p.qty} كرتون (${p.qty * p.unitsPerCarton} وحدة)`;
       priceDisplay = `${p.cartonPrice.toFixed(2)} / كرتون (${p.unitsPerCarton} وحدة)`;
     }
-    html += `<tr><td style="text-align:left">${escapeHtml(p.prodName)}</td><td>${p.sellType === 'unit' ? 'وحدة' : 'كرتون'}</td><td>${qtyDisplay}</td><td>${priceDisplay}</td><td>${(p.sellType === 'unit' ? p.qty * p.unitPrice : p.qty * p.cartonPrice).toFixed(2)}</td></tr>`; 
+    html += `<tr><td style="text-align:left">${escapeHtml(p.prodName)}</td><td>${p.sellType === 'unit' ? 'وحدة' : 'كرتون'}</td><td>${qtyDisplay}</td><td>${priceDisplay}</td><td>${(p.sellType === 'unit' ? p.qty * p.unitPrice : p.qty * p.cartonPrice).toFixed(2)}</td></tr>`;
   });
   html += `</tbody></table></div>
     <div class="total">الإجمالي: ${inv.total.toFixed(2)} — مدفوع: ${paid.toFixed(2)} — المتبقي: ${(inv.total-paid).toFixed(2)}</div>
@@ -1016,7 +1022,6 @@ function printInvoice(id){
     </div></body></html>`;
   const w = window.open('','_blank'); w.document.write(html); w.document.close(); w.focus(); w.print();
 }
-
 /* ===========================
    Clients Management
    =========================== */
@@ -1055,13 +1060,13 @@ function saveClient(){
     notes: (document.getElementById('c_notes').value||'').trim()
   };
   if(!obj.name){ alert('أدخل اسم العميل'); return; }
-  if(editingClientIndex >= 0){ 
-    clients[editingClientIndex] = obj; 
-    editingClientIndex = -1; 
+  if(editingClientIndex >= 0){
+    clients[editingClientIndex] = obj;
+    editingClientIndex = -1;
   } else clients.push(obj);
-  saveAll(); 
-  clearClientForm(); 
-  renderClients(); 
+  saveAll();
+  clearClientForm();
+  renderClients();
   alert('تم الحفظ');
 }
 function editClient(i){
@@ -1076,28 +1081,27 @@ function editClient(i){
   document.getElementById('c_notes').value = c.notes||'';
   window.scrollTo(0,0);
 }
-function deleteClient(i){ 
-  if(!confirm('هل تريد حذف السجل؟')) return; 
-  clients.splice(i,1); 
-  saveAll(); 
-  renderClients(); 
+function deleteClient(i){
+  if(!confirm('هل تريد حذف السجل؟')) return;
+  clients.splice(i,1);
+  saveAll();
+  renderClients();
 }
-function clearClientForm(){ 
-  ['c_name','c_idnum','c_phone','c_email','c_address','c_notes'].forEach(id=>document.getElementById(id).value=''); 
-  document.getElementById('c_type').value='عميل'; 
-  editingClientIndex=-1; 
+function clearClientForm(){
+  ['c_name','c_idnum','c_phone','c_email','c_address','c_notes'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('c_type').value='عميل';
+  editingClientIndex=-1;
 }
-function pickClient(i){ 
-  const c = clients[i]; 
-  if(!c) return; 
-  selectedClient = c; 
-  renderChosenClient(); 
-  openPage('salesPage'); 
+function pickClient(i){
+  const c = clients[i];
+  if(!c) return;
+  selectedClient = c;
+  renderChosenClient();
+  openPage('salesPage');
 }
-function exportClients(){ 
-  downloadText('clients_export.json', JSON.stringify(clients,null,2)); 
+function exportClients(){
+  downloadText('clients_export.json', JSON.stringify(clients,null,2));
 }
-
 /* ===========================
    Invoices View
    =========================== */
@@ -1171,11 +1175,11 @@ function viewInvoice(id){
 ملاحظات: ${inv.notes||''}`;
   alert(txt);
 }
-function deleteInvoice(id){ 
-  if(!confirm('حذف الفاتورة؟')) return; 
-  invoices = invoices.filter(x=>x.id !== id); 
-  saveAll(); 
-  renderInvoicesView(); 
+function deleteInvoice(id){
+  if(!confirm('حذف الفاتورة؟')) return;
+  invoices = invoices.filter(x=>x.id !== id);
+  saveAll();
+  renderInvoicesView();
 }
 function editInvoice(id){
   alert('تعديل الفاتورة غير مدعوم حالياً. يمكنك حذفها وإعادة إنشائها.');
@@ -1183,17 +1187,16 @@ function editInvoice(id){
 function printInvoicesSection(sectionName){
   alert('طباعة مجموعة الفواتير غير مدعومة حالياً. يمكنك طباعة كل فاتورة على حدة.');
 }
-
 /* ===========================
    Client Selector Modal
    =========================== */
-function renderChosenClient(){ 
-  const box = document.getElementById('chosenClientBox'); 
-  if(!selectedClient){ 
-    box.innerHTML = 'لم يتم اختيار عميل بعد'; 
-    return; 
-  } 
-  box.innerHTML = `<div style="font-weight:800">${escapeHtml(selectedClient.name)} <span class="small">(${escapeHtml(selectedClient.type||'عميل')})</span></div><div>الهاتف: ${escapeHtml(selectedClient.phone||'-')}</div><div class="small">${escapeHtml(selectedClient.address||'')}</div>`; 
+function renderChosenClient(){
+  const box = document.getElementById('chosenClientBox');
+  if(!selectedClient){
+    box.innerHTML = 'لم يتم اختيار عميل بعد';
+    return;
+  }
+  box.innerHTML = `<div style="font-weight:800">${escapeHtml(selectedClient.name)} <span class="small">(${escapeHtml(selectedClient.type||'عميل')})</span></div><div>الهاتف: ${escapeHtml(selectedClient.phone||'-')}</div><div class="small">${escapeHtml(selectedClient.address||'')}</div>`;
 }
 function openClientSelectorForType(type){
   currentClientType = type;
@@ -1201,10 +1204,10 @@ function openClientSelectorForType(type){
   document.body.appendChild(Object.assign(document.createElement('div'),{id:'modalOverlay',className:'overlay',onclick:closeClientSelector}));
   renderClientSelectorList();
 }
-function closeClientSelector(){ 
-  document.getElementById('clientSelector').style.display='none'; 
-  const o=document.getElementById('modalOverlay'); 
-  if(o) o.remove(); 
+function closeClientSelector(){
+  document.getElementById('clientSelector').style.display='none';
+  const o=document.getElementById('modalOverlay');
+  if(o) o.remove();
 }
 function renderClientSelectorList(){
   const q = (document.getElementById('selectorSearch')||{value:''}).value.trim().toLowerCase();
@@ -1221,12 +1224,11 @@ function renderClientSelectorList(){
     area.appendChild(d);
   });
 }
-function chooseClient(i){ 
-  selectedClient = clients[i]; 
-  renderChosenClient(); 
-  closeClientSelector(); 
+function chooseClient(i){
+  selectedClient = clients[i];
+  renderChosenClient();
+  closeClientSelector();
 }
-
 /* ===========================
    Client Accounts
    =========================== */
@@ -1279,7 +1281,6 @@ function openSupplierAccount(index){
   document.getElementById('supplierAccountContent').innerHTML = html;
   openPage('supplierAccountPage');
 }
-
 /* ===========================
    Client Docs (Vouchers)
    =========================== */
@@ -1331,7 +1332,7 @@ function renderDocProductsTable(){
     if (rows.length > 0) {
       hasResults = true;
       const headerRow = document.createElement('tr');
-      headerRow.innerHTML = `<td colspan="6" style="background:#1a1a1a;font-weight:700;text-align:right;">${escapeHtml(catName)}</td>`;
+      headerRow.innerHTML = `<td colspan="6" style="background:var(--accent); color: var(--bg); font-weight:700;text-align:right;">${escapeHtml(catName)}</td>`; // تعديل هنا
       tbody.appendChild(headerRow);
       rows.forEach(row => tbody.appendChild(row));
     }
@@ -1497,17 +1498,17 @@ function addDocument(){
       item.cartonCount -= it.qty;
     }
   });
-  const rec = { 
-    id: uid('DOC'), 
-    type, 
-    clientIndex: isFinite(clientIdx) ? clientIdx : null, 
-    clientName: name, 
+  const rec = {
+    id: uid('DOC'),
+    type,
+    clientIndex: isFinite(clientIdx) ? clientIdx : null,
+    clientName: name,
     products: JSON.parse(JSON.stringify(docCart)),
-    amount, 
-    reason, 
-    datetime: new Date().toISOString(), 
-    invoiceId: invoiceId || null, 
-    method 
+    amount,
+    reason,
+    datetime: new Date().toISOString(),
+    invoiceId: invoiceId || null,
+    method
   };
   documents.push(rec);
   if(type === 'سند قبض'){
@@ -1597,17 +1598,17 @@ function printSingleDocument(id){
   </div>`;
   const w = window.open('','_blank'); w.document.write(`<html dir="rtl"><head><meta charset="utf-8"></head><body>${html}</body></html>`); w.document.close(); w.focus(); w.print();
 }
-function deleteDocument(id){ 
-  if(!confirm('حذف المستند؟')) return; 
-  documents = documents.filter(x=>x.id !== id); 
-  receipts = receipts.filter(x=>x.id !== id); 
-  expenses = expenses.filter(x=>x.id !== id); 
-  invoices.forEach(inv=>{ 
-    if(inv.payments) inv.payments = inv.payments.filter(p=> p.id !== id); 
-  }); 
-  saveAll(); 
-  renderDocumentsTable(); 
-  renderInvoicesView(); 
+function deleteDocument(id){
+  if(!confirm('حذف المستند؟')) return;
+  documents = documents.filter(x=>x.id !== id);
+  receipts = receipts.filter(x=>x.id !== id);
+  expenses = expenses.filter(x=>x.id !== id);
+  invoices.forEach(inv=>{
+    if(inv.payments) inv.payments = inv.payments.filter(p=> p.id !== id);
+  });
+  saveAll();
+  renderDocumentsTable();
+  renderInvoicesView();
 }
 function exportClientDocsCSV(){
   if(!documents.length){ alert('لا توجد مستندات'); return; }
@@ -1616,10 +1617,10 @@ function exportClientDocsCSV(){
     const productsText = (d.products || []).map(p => p.sellType === 'unit' ? `${p.prodName}(${p.qty}u)` : `${p.prodName}(${p.qty}c)`).join('; ');
     rows.push([d.type,d.clientName,productsText,d.amount,toDateString(d.datetime),d.invoiceId||'',d.method||'']);
   });
-  const csv = rows.map(r => r.map(c => `"${String(c||'').replace(/"/g,'""')}"`).join(',')).join('\n');
+  const csv = rows.map(r => r.map(c => `"${String(c||'').replace(/"/g,'""')}"`).join(',')).join('
+');
   downloadText('client_documents.csv', csv);
 }
-
 /* ===========================
    Reports
    =========================== */
@@ -1634,38 +1635,39 @@ function generateDailyReport(){
   html += `</tbody></table>`;
   document.getElementById('dailyReport').innerHTML = html; window._lastDailyReport = {date:day, rows:list};
 }
-function exportDailyCSV(){ 
-  const data = window._lastDailyReport; 
-  if(!data){ alert('اعرض التقرير أولاً'); return; } 
-  const rows = [['رقم الفاتورة','العميل','التاريخ','الإجمالي','المدفوع']]; 
-  data.rows.forEach(i=> rows.push([i.id,i.client.name,toDateString(i.datetime),i.total,sumPaymentsOfInvoice(i)])); 
-  const csv = rows.map(r => r.map(c=>`"${String(c||'').replace(/"/g,'""')}"`).join(',')).join('\n'); 
-  downloadText(`daily_report_${data.date}.csv`, csv); 
+function exportDailyCSV(){
+  const data = window._lastDailyReport;
+  if(!data){ alert('اعرض التقرير أولاً'); return; }
+  const rows = [['رقم الفاتورة','العميل','التاريخ','الإجمالي','المدفوع']];
+  data.rows.forEach(i=> rows.push([i.id,i.client.name,toDateString(i.datetime),i.total,sumPaymentsOfInvoice(i)]));
+  const csv = rows.map(r => r.map(c=>`"${String(c||'').replace(/"/g,'""')}"`).join(',')).join('
+');
+  downloadText(`daily_report_${data.date}.csv`, csv);
 }
-function generateMonthlyReport(){ 
-  const m = document.getElementById('reportMonth').value; 
-  if(!m){ alert('اختر شهراً'); return; } 
-  const [y,mm] = m.split('-').map(Number); 
-  const start = new Date(y,mm-1,1,0,0,0,0); 
-  const end = new Date(y,mm,0,23,59,59,999); 
-  const list = invoices.filter(inv => { const d=new Date(inv.datetime); return d>=start && d<=end; }); 
-  let total = 0; let paidTotal = 0; list.forEach(i=> { total += (i.total||0); paidTotal += sumPaymentsOfInvoice(i); }); 
-  let html = `<div class="client-card">عدد الفواتير: ${list.length} — المجموع الكلي: ${total.toFixed(2)} — المدفوع: ${paidTotal.toFixed(2)}</div>`; 
-  html += `<table><thead><tr><th>رقم الفاتورة</th><th>العميل</th><th>التاريخ</th><th>الإجمالي</th><th>المدفوع</th></tr></thead><tbody>`; 
-  list.forEach(i=> html += `<tr><td>${escapeHtml(i.id)}</td><td>${escapeHtml(i.client.name||'-')}</td><td>${toDateString(i.datetime)}</td><td>${i.total.toFixed(2)}</td><td>${sumPaymentsOfInvoice(i).toFixed(2)}</td></tr>`); 
-  html += `</tbody></table>`; 
-  document.getElementById('monthlyReport').innerHTML = html; 
-  window._lastMonthlyReport = {month:m, rows:list}; 
+function generateMonthlyReport(){
+  const m = document.getElementById('reportMonth').value;
+  if(!m){ alert('اختر شهراً'); return; }
+  const [y,mm] = m.split('-').map(Number);
+  const start = new Date(y,mm-1,1,0,0,0,0);
+  const end = new Date(y,mm,0,23,59,59,999);
+  const list = invoices.filter(inv => { const d=new Date(inv.datetime); return d>=start && d<=end; });
+  let total = 0; let paidTotal = 0; list.forEach(i=> { total += (i.total||0); paidTotal += sumPaymentsOfInvoice(i); });
+  let html = `<div class="client-card">عدد الفواتير: ${list.length} — المجموع الكلي: ${total.toFixed(2)} — المدفوع: ${paidTotal.toFixed(2)}</div>`;
+  html += `<table><thead><tr><th>رقم الفاتورة</th><th>العميل</th><th>التاريخ</th><th>الإجمالي</th><th>المدفوع</th></tr></thead><tbody>`;
+  list.forEach(i=> html += `<tr><td>${escapeHtml(i.id)}</td><td>${escapeHtml(i.client.name||'-')}</td><td>${toDateString(i.datetime)}</td><td>${i.total.toFixed(2)}</td><td>${sumPaymentsOfInvoice(i).toFixed(2)}</td></tr>`);
+  html += `</tbody></table>`;
+  document.getElementById('monthlyReport').innerHTML = html;
+  window._lastMonthlyReport = {month:m, rows:list};
 }
-function exportMonthlyCSV(){ 
-  const data = window._lastMonthlyReport; 
-  if(!data){ alert('اعرض التقرير أولاً'); return; } 
-  const rows = [['رقم الفاتورة','العميل','التاريخ','الإجمالي','المدفوع']]; 
-  data.rows.forEach(i=> rows.push([i.id,i.client.name,toDateString(i.datetime),i.total,sumPaymentsOfInvoice(i)])); 
-  const csv = rows.map(r => r.map(c=>`"${String(c||'').replace(/"/g,'""')}"`).join(',')).join('\n'); 
-  downloadText(`monthly_report_${data.month}.csv`, csv); 
+function exportMonthlyCSV(){
+  const data = window._lastMonthlyReport;
+  if(!data){ alert('اعرض التقرير أولاً'); return; }
+  const rows = [['رقم الفاتورة','العميل','التاريخ','الإجمالي','المدفوع']];
+  data.rows.forEach(i=> rows.push([i.id,i.client.name,toDateString(i.datetime),i.total,sumPaymentsOfInvoice(i)]));
+  const csv = rows.map(r => r.map(c=>`"${String(c||'').replace(/"/g,'""')}"`).join(',')).join('
+');
+  downloadText(`monthly_report_${data.month}.csv`, csv);
 }
-
 /* ===========================
    Init
    =========================== */
@@ -1686,9 +1688,9 @@ function renderAllInitial(){
 }
 function populateClientSelects(){
   const docSel = document.getElementById('docClientSelect');
-  if(docSel){ 
-    docSel.innerHTML = '<option value="">— اختر —</option>'; 
-    clients.forEach((c,i)=> docSel.insertAdjacentHTML('beforeend', `<option value="${i}">${escapeHtml(c.name)} — ${escapeHtml(c.type||'')}</option>`)); 
+  if(docSel){
+    docSel.innerHTML = '<option value="">— اختر —</option>';
+    clients.forEach((c,i)=> docSel.insertAdjacentHTML('beforeend', `<option value="${i}">${escapeHtml(c.name)} — ${escapeHtml(c.type||'')}</option>`));
   }
 }
 function addProductByBarcode(){
