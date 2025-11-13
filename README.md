@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>نظام إدارة شركة شعبيات الحارة</title>
+<title>نظام إدارة شركة شعبيات الحارة - معدل</title>
 <style>
   :root{
     /* تم تعديل المتغيرات لتتوافق مع المخطط اللوني المفضل: Cyan و White */
@@ -180,17 +180,6 @@
   #clientSelector h3[style*="color:var(--accent)"] {
     color: var(--accent) !important; /* لون السماوي للعنوان */
   }
-  /* تعديل خلفية قسم تفاصيل الكرتون في صفحة الأصناف */
-  #inventoryPage .right-col > div[style*="background:#151515"] {
-    background: var(--hover-bg) !important; /* سماوي أفتح */
-    border: 1px solid var(--table-border) !important;
-    color: var(--text) !important;
-  }
-  /* تعديل خلفية عناوين الجداول في صفحة المستندات */
-  #clientDocsPage table thead tr[style*="background:#1a1a1a"] {
-    background: var(--accent) !important; /* سماوي */
-    color: var(--bg) !important; /* نص أبيض */
-  }
   /* تحسين التوافق مع شاشات الموبايل للجداول */
   table {
     display: block;
@@ -201,7 +190,7 @@
 </head>
 <body>
 <header>
-  <h1>نظام إدارة   شعبيات الحارة</h1>
+  <h1>نظام إدارة   شعبيات الحارة - معدل</h1>
   <div class="muted">نسخة محلية — كل البيانات مخزنة في متصفحك (LocalStorage)</div>
 </header>
 <div class="wrap">
@@ -388,7 +377,7 @@
     </div>
     <div id="invoicesContainer" style="margin-top:10px"></div>
   </div>
-  <!-- Client Documents Page -->
+  <!-- Client Documents Page - Modified -->
   <div id="clientDocsPage" class="page">
     <div style="display:flex;justify-content:space-between;align-items:center">
       <h2>مستندات العملاء — سند قبض / سند صرف</h2>
@@ -416,28 +405,17 @@
             <select id="docInvoiceSelect" class="search"><option value="">— لا يوجد —</option></select>
           </div>
         </div>
-        <label style="margin-top:12px">قائمة المنتجات</label>
-        <div style="display:flex;gap:8px;margin-top:6px;align-items:center">
-          <input id="docProdSearch" class="search" placeholder="ابحث عن منتج..." style="flex:1" oninput="renderDocProductsTable()">
-          <button class="btn" onclick="renderDocProductsTable()" style="padding:6px 10px;font-size:13px">🔄 تحديث</button>
-        </div>
-        <div style="margin-top:8px;overflow:auto;max-height:200px">
-          <div id="docProductsTable"></div>
-        </div>
+        <!-- Removed product table section -->
         <label style="margin-top:12px">طريقة الدفع</label>
         <select id="docPaymentMethod" class="search">
           <option value="نقدا">نقدا</option>
           <option value="شبكة">شبكة</option>
           <option value="بنك">بنك</option>
         </select>
-        <label>السبب / ملاحظات</label>
+        <label style="margin-top:12px">المبلغ المسلم</label>
+        <input id="docPaidAmount" type="number" min="0" step="0.01" value="0" class="search" placeholder="مثلاً: 150">
+        <label style="margin-top:8px">السبب / ملاحظات</label>
         <input id="docReason" type="text">
-        <h4 style="margin-top:12px">سلة السند</h4>
-        <table>
-          <thead><tr><th>المنتج</th><th>كمية</th><th>سعر</th><th>المجموع</th><th>تعديل</th><th>إزالة</th></tr></thead>
-          <tbody id="docCartBody"></tbody>
-        </table>
-        <div style="margin-top:8px;font-weight:800">الإجمالي: <span id="docGrandTotal">0.00</span></div>
         <div style="margin-top:10px;display:flex;gap:8px">
           <button class="btn primary" onclick="addDocument()">💾 حفظ المستند</button>
           <button class="btn" onclick="clearDocForm()">🗑️ مسح</button>
@@ -450,7 +428,7 @@
         <input id="docSearch" class="search" placeholder="ابحث..." oninput="renderDocumentsTable()">
         <div style="margin-top:8px;overflow:auto">
           <table>
-            <thead><tr style="background:var(--accent); color: var(--bg);"><th>النوع</th><th>الاسم</th><th>المنتجات</th><th>المبلغ</th><th>التاريخ</th><th>إجراء</th></tr></thead>
+            <thead><tr style="background:var(--accent); color: var(--bg);"><th>النوع</th><th>الاسم</th><th>المبلغ المسلم</th><th>التاريخ</th><th>إجراء</th></tr></thead> <!-- Updated headers -->
             <tbody id="docsTbody"></tbody>
           </table>
         </div>
@@ -608,7 +586,7 @@ function openPage(id){
   else if(id === 'inventoryPage') { renderInventory(); clearInventoryForm(); }
   else if(id === 'salesPage') { renderProductsTable(); populateClientSelects(); renderCart(); }
   else if(id === 'invoicesPage') renderInvoicesView();
-  else if(id === 'clientDocsPage') { populateClientSelects(); renderDocProductsTable(); renderDocumentsTable(); }
+  else if(id === 'clientDocsPage') { populateClientSelects(); renderDocumentsTable(); } // Removed renderDocProductsTable
 }
 openPage('dashboard');
 /* ===========================
@@ -968,8 +946,7 @@ function finalizeInvoice(){
       type: 'سند قبض',
       clientIndex: null,
       clientName: selectedClient.name,
-      items: inv.products.map(p=>p.prodName).join(', '),
-      amount: paidNow,
+      amount: paidNow, // Changed from items to amount
       reason: 'دفعة مرتبطة بفاتورة',
       datetime: pay.datetime,
       invoiceId: inv.id,
@@ -1296,267 +1273,77 @@ function openSupplierAccount(index){
   openPage('supplierAccountPage');
 }
 /* ===========================
-   Client Docs (Vouchers)
+   Client Docs (Vouchers) - Modified
    =========================== */
-let docCart = [];
+// Removed docCart variable as it's no longer needed
 function renderDocProductsTable(){
-  const container = document.getElementById('docProductsTable');
-  const q = (document.getElementById('docProdSearch')||{value:''}).value.trim().toLowerCase();
-  container.innerHTML = `
-    <table style="font-size:12px">
-      <thead>
-        <tr>
-          <th>المصنف</th>
-          <th>المنتج</th>
-          <th>الوحدة</th>
-          <th>الكرتون</th>
-          <th>المتوفر</th>
-          <th>+</th>
-        </tr>
-      </thead>
-      <tbody id="docProductsTbody"></tbody>
-    </table>
-  `;
-  const tbody = document.getElementById('docProductsTbody');
-  if(!categories.length){
-    tbody.innerHTML = '<tr><td colspan="6" class="small">لا توجد أصناف.</td></tr>';
-    return;
-  }
-  let hasResults = false;
-  categories.forEach(cat => {
-    const catName = cat.name;
-    const rows = [];
-    Object.keys(cat.products || {}).forEach(prodName => {
-      const item = cat.products[prodName];
-      const totalUnits = item.cartonCount * item.unitsPerCarton;
-      const label = `${catName} - ${prodName}`.toLowerCase();
-      if (q && !label.includes(q) && !prodName.toLowerCase().includes(q) && !catName.toLowerCase().includes(q)) return;
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
-        <td>${escapeHtml(catName)}</td>
-        <td style="text-align:left">${escapeHtml(prodName)}</td>
-        <td>${item.unitPrice.toFixed(2)}</td>
-        <td>${item.cartonPrice.toFixed(2)} (${item.unitsPerCarton}/كرتون)</td>
-        <td>${item.cartonCount} كرتون (${totalUnits} وحدة)</td>
-        <td><button class="btn" style="padding:4px 8px;font-size:13px;" onclick="docAddProduct('${escapeHtml(catName)}','${escapeHtml(prodName)}','unit')">+ وحدة</button><br>
-            <button class="btn" style="padding:4px 8px;font-size:13px;margin-top:4px;" onclick="docAddProduct('${escapeHtml(catName)}','${escapeHtml(prodName)}','carton')">+ كرتون</button></td>
-      `;
-      rows.push(tr);
-    });
-    if (rows.length > 0) {
-      hasResults = true;
-      const headerRow = document.createElement('tr');
-      headerRow.innerHTML = `<td colspan="6" style="background:var(--accent); color: var(--bg); font-weight:700;text-align:right;">${escapeHtml(catName)}</td>`;
-      tbody.appendChild(headerRow);
-      rows.forEach(row => tbody.appendChild(row));
-    }
-  });
-  if (!hasResults) {
-    tbody.innerHTML = '<tr><td colspan="6" class="small">لا توجد نتائج.</td></tr>';
-  }
+  // This function is now empty as the product table is removed
 }
 function docAddProduct(catName, prodName, type){
-  const cat = categories.find(c=>c.name===catName);
-  if(!cat || !cat.products[prodName]) return;
-  const item = cat.products[prodName];
-  const totalUnits = item.cartonCount * item.unitsPerCarton;
-  const key = `${catName}|${prodName}|${type}`;
-  const existing = docCart.find(c => c.key === key);
-  if(type === 'unit'){
-    if(existing){
-      if(existing.qty + 1 > totalUnits){
-        alert('الكمية المطلوبة أكبر من المتوفر');
-        return;
-      }
-      existing.qty += 1;
-    } else {
-      if(totalUnits < 1){
-        alert('المنتج نفد');
-        return;
-      }
-      docCart.push({
-        key,
-        catName,
-        prodName,
-        sellType: 'unit',
-        qty: 1,
-        unitPrice: item.unitPrice,
-        cartonPrice: item.cartonPrice,
-        unitsPerCarton: item.unitsPerCarton
-      });
-    }
-  } else {
-    if(existing){
-      if(existing.qty + 1 > item.cartonCount){
-        alert('الكراتين المطلوبة أكثر من المتوفر');
-        return;
-      }
-      existing.qty += 1;
-    } else {
-      if(item.cartonCount < 1){
-        alert('لا توجد كراتين متوفرة');
-        return;
-      }
-      docCart.push({
-        key,
-        catName,
-        prodName,
-        sellType: 'carton',
-        qty: 1,
-        unitPrice: item.unitPrice,
-        cartonPrice: item.cartonPrice,
-        unitsPerCarton: item.unitsPerCarton
-      });
-    }
-  }
-  renderDocCart();
+  // This function is now empty as the product table is removed
 }
 function renderDocCart(){
-  const body = document.getElementById('docCartBody'); body.innerHTML = '';
-  let total = 0;
-  docCart.forEach((it, idx)=>{
-    let price, subtotal, displayQty;
-    if(it.sellType === 'unit'){
-      price = it.unitPrice;
-      subtotal = it.qty * price;
-      displayQty = `${it.qty} وحدة`;
-    } else {
-      price = it.cartonPrice;
-      subtotal = it.qty * price;
-      displayQty = `${it.qty} كرتون (${it.qty * it.unitsPerCarton} وحدة)`;
-    }
-    total += subtotal;
-    const tr = document.createElement('tr');
-    tr.innerHTML = `<td style="text-align:left">${escapeHtml(it.prodName)} <div class="small">${escapeHtml(it.catName)}</div></td>
-      <td>${displayQty}</td>
-      <td>${price.toFixed(2)}</td><td>${subtotal.toFixed(2)}</td>
-      <td><button class="btn" onclick="docEditItem(${idx})">✏️ تعديل</button></td>
-      <td><button class="btn" onclick="docRemoveItem(${idx})">🗑️ حذف</button></td>`;
-    body.appendChild(tr);
-  });
-  document.getElementById('docGrandTotal').innerText = total.toFixed(2);
+  // This function is now empty as the product cart is removed
 }
-function docRemoveItem(i){ docCart.splice(i,1); renderDocCart(); }
-function docEditItem(i){
-  const item = docCart[i];
-  if(!item) return;
-  const newQty = prompt('أدخل الكمية الجديدة:', item.qty);
-  const newPrice = prompt('أدخل السعر الجديد:', item.sellType === 'unit' ? item.unitPrice : item.cartonPrice);
-  if(newQty === null || newPrice === null) return;
-  const qty = Number(newQty);
-  const price = Number(newPrice);
-  if(isNaN(qty) || isNaN(price) || qty <= 0 || price < 0){
-    alert('الرجاء إدخال قيم صحيحة');
-    return;
-  }
-  if(item.sellType === 'unit'){
-    const cat = categories.find(c=>c.name===item.catName);
-    const available = (cat && cat.products[item.prodName]) ? cat.products[item.prodName].cartonCount * cat.products[item.prodName].unitsPerCarton : 0;
-    if(qty > available){
-      alert(`الكمية المطلوبة تفوق المتوفر (${available})`);
-      return;
-    }
-  } else {
-    const cat = categories.find(c=>c.name===item.catName);
-    const available = (cat && cat.products[item.prodName]) ? cat.products[item.prodName].cartonCount : 0;
-    if(qty > available){
-      alert(`الكمية المطلوبة تفوق المتوفر (${available})`);
-      return;
-    }
-  }
-  docCart[i].qty = qty;
-  if(item.sellType === 'unit'){
-    docCart[i].unitPrice = price;
-  } else {
-    docCart[i].cartonPrice = price;
-  }
-  renderDocCart();
-}
+function docRemoveItem(i){}
+function docEditItem(i){}
 function addDocument(){
   const type = document.getElementById('docType').value || 'سند قبض';
   const clientIdx = Number(document.getElementById('docClientSelect').value);
   const name = (document.getElementById('docName').value || (clients[clientIdx] ? clients[clientIdx].name : '')).trim();
-  const amount = Number(document.getElementById('docGrandTotal').innerText) || 0;
+  const amount = parseFloat(document.getElementById('docPaidAmount').value) || 0; // Using the new paid amount field
   const reason = (document.getElementById('docReason').value||'').trim();
   const invoiceId = (document.getElementById('docInvoiceSelect') ? document.getElementById('docInvoiceSelect').value : '');
   const method = (document.getElementById('docPaymentMethod')||{value:'نقدا'}).value || 'نقدا';
+
   if(!name){ alert('أدخل اسم العميل/المورد'); return; }
-  if(docCart.length === 0){ alert('أضف منتجات إلى السند'); return; }
-  for(const it of docCart){
-    const cat = categories.find(c=>c.name===it.catName);
-    if(!cat || !cat.products[it.prodName]){
-      alert('منتج غير موجود في المخزون: '+it.prodName); return;
-    }
-    const item = cat.products[it.prodName];
-    if(it.sellType === 'unit'){
-      const totalUnits = item.cartonCount * item.unitsPerCarton;
-      if(it.qty > totalUnits){
-        alert(`الكمية المطلوبة لـ ${it.prodName} أكبر من المتوفر (${totalUnits})`);
-        return;
-      }
-    } else {
-      if(it.qty > item.cartonCount){
-        alert(`الكراتين المطلوبة لـ ${it.prodName} أكبر من المتوفر (${item.cartonCount})`);
-        return;
-      }
-    }
-  }
-  docCart.forEach(it => {
-    const cat = categories.find(c=>c.name===it.catName);
-    const item = cat.products[it.prodName];
-    if(it.sellType === 'unit'){
-      const totalUnits = item.cartonCount * item.unitsPerCarton;
-      const newTotal = totalUnits - it.qty;
-      item.cartonCount = Math.floor(newTotal / item.unitsPerCarton);
-    } else {
-      item.cartonCount -= it.qty;
-    }
-  });
+  if(amount <= 0){ alert('أدخل مبلغ السند'); return; }
+
   const rec = {
     id: uid('DOC'),
     type,
     clientIndex: isFinite(clientIdx) ? clientIdx : null,
     clientName: name,
-    products: JSON.parse(JSON.stringify(docCart)),
-    amount,
+    amount: amount, // Using the new amount field
     reason,
     datetime: new Date().toISOString(),
     invoiceId: invoiceId || null,
     method
   };
+
   documents.push(rec);
   if(type === 'سند قبض'){
     receipts.push(rec);
   } else if(type === 'سند صرف'){
     expenses.push(rec);
   }
+
   if(invoiceId){
     const inv = invoices.find(i=> i.id === invoiceId);
     if(inv){
       if(!inv.payments) inv.payments = [];
-      inv.payments.push({ id: rec.id, datetime: rec.datetime, amount: rec.amount, method: rec.method });
+      inv.payments.push({ id: rec.id, datetime: rec.datetime, amount: amount, method: rec.method, note: `سند ${type} مرتبط` });
     }
   }
+
   saveAll();
   clearDocForm();
   renderDocumentsTable();
   renderInvoicesView();
-  alert('تم حفظ السند وخصم الكميات من المخزون.');
+  alert('تم حفظ السند.');
 }
+
 function clearDocForm(){
   document.getElementById('docType').value = 'سند قبض';
   document.getElementById('docClientSelect').value = '';
   document.getElementById('docName').value = '';
-  document.getElementById('docProdSearch').value = '';
   document.getElementById('docReason').value = '';
   document.getElementById('docPaymentMethod').value = 'نقدا';
-  // تفريغ السلة
-  docCart = [];
-  renderDocCart();
-  // تحديث جدول المنتجات بعد التفريغ
-  renderDocProductsTable();
+  document.getElementById('docPaidAmount').value = '0';
+  // Removed cart clearing
   onDocTypeChange();
 }
+
 function onDocTypeChange(){
   const t = document.getElementById('docType').value;
   populateClientSelects();
@@ -1574,23 +1361,25 @@ function onDocTypeChange(){
       opt.style.display = 'block';
     }
   });
-  renderDocProductsTable();
+  // Removed renderDocProductsTable call
 }
+
 function onDocClientChange(){
   const idx = Number(document.getElementById('docClientSelect').value);
   if(!Number.isFinite(idx) || !clients[idx]){ document.getElementById('docName').value=''; return; }
   const c = clients[idx];
   document.getElementById('docName').value = c.name;
 }
+
 function renderDocumentsTable(){
   const q = (document.getElementById('docSearch')||{value:''}).value.trim().toLowerCase();
   const tbody = document.getElementById('docsTbody'); tbody.innerHTML = '';
-  if(!documents.length){ tbody.innerHTML = '<tr><td colspan="6" class="small">لا توجد مستندات</td></tr>'; return; }
+  if(!documents.length){ tbody.innerHTML = '<tr><td colspan="5" class="small">لا توجد مستندات</td></tr>'; return; }
   documents.slice().reverse().forEach(d=>{
     if(q && !((d.clientName||'').toLowerCase().includes(q) || (d.reason||'').toLowerCase().includes(q) || (d.type||'').toLowerCase().includes(q))) return;
-    const productsText = (d.products || []).map(p => p.sellType === 'unit' ? `${p.prodName} (${p.qty} وحدة)` : `${p.prodName} (${p.qty} كرتون)`).join(', ') || '-';
+    // Removed productsText generation
     const tr = document.createElement('tr');
-    tr.innerHTML = `<td>${escapeHtml(d.type)}</td><td>${escapeHtml(d.clientName)}</td><td>${escapeHtml(productsText)}</td><td>${d.amount}</td><td>${toDateString(d.datetime)}</td>
+    tr.innerHTML = `<td>${escapeHtml(d.type)}</td><td>${escapeHtml(d.clientName)}</td><td>${d.amount}</td><td>${toDateString(d.datetime)}</td> <!-- Updated columns -->
       <td>
         <button class="btn" onclick="printSingleDocument('${d.id}')">🖨️ طباعة</button>
         <button class="btn" onclick="deleteDocument('${d.id}')">🗑️ حذف</button>
@@ -1598,22 +1387,23 @@ function renderDocumentsTable(){
     tbody.appendChild(tr);
   });
 }
+
 function printSingleDocument(id){
   const d = documents.find(x=>x.id===id); if(!d) return;
   const company = 'شعبيات الحارة';
-  const productsText = (d.products || []).map(p => p.sellType === 'unit' ? `${p.prodName} (${p.qty} وحدة)` : `${p.prodName} (${p.qty} كرتون)`).join(', ') || '-';
+  // Simplified print content without products list
   const html = `<div style="direction:rtl;font-family:Arial;padding:10px;max-width:700px;margin:10px auto;border:1px solid #ddd;border-radius:8px">
     <div style="display:flex;justify-content:space-between"><div style="font-weight:900;color:#b37a3b"><img src="${logoDataUrl}" style="height:36px;vertical-align:middle" /> ${company}</div><div>تاريخ: ${toDateString(d.datetime)}</div></div>
     <div style="margin-top:8px"><strong>النوع:</strong> ${escapeHtml(d.type)}</div>
     <div><strong>الاسم:</strong> ${escapeHtml(d.clientName)}</div>
-    <div><strong>المنتجات:</strong> ${escapeHtml(productsText)}</div>
-    <div><strong>المبلغ:</strong> ${d.amount}</div>
+    <div><strong>المبلغ المسلم:</strong> ${d.amount}</div>
     <div style="margin-top:8px"><strong>السبب:</strong> ${escapeHtml(d.reason||'-')}</div>
     <div style="margin-top:8px"><strong>مرتبطة بفاتورة:</strong> ${escapeHtml(d.invoiceId || '-')}</div>
     <div style="margin-top:8px"><strong>الطريقة:</strong> ${escapeHtml(d.method||'-')}</div>
   </div>`;
   const w = window.open('','_blank'); w.document.write(`<html dir="rtl"><head><meta charset="utf-8"></head><body>${html}</body></html>`); w.document.close(); w.focus(); w.print();
 }
+
 function deleteDocument(id){
   if(!confirm('حذف المستند؟')) return;
   documents = documents.filter(x=>x.id !== id);
@@ -1626,16 +1416,19 @@ function deleteDocument(id){
   renderDocumentsTable();
   renderInvoicesView();
 }
+
 function exportClientDocsCSV(){
   if(!documents.length){ alert('لا توجد مستندات'); return; }
-  const rows = [['النوع','الاسم','المنتجات','المبلغ','التاريخ','فاتورة مرتبطة','طريقة']];
+  // Updated CSV headers
+  const rows = [['النوع','الاسم','المبلغ المسلم','التاريخ','فاتورة مرتبطة','طريقة']];
   documents.forEach(d=> {
-    const productsText = (d.products || []).map(p => p.sellType === 'unit' ? `${p.prodName}(${p.qty}u)` : `${p.prodName}(${p.qty}c)`).join('; ');
-    rows.push([d.type,d.clientName,productsText,d.amount,toDateString(d.datetime),d.invoiceId||'',d.method||'']);
+    // Updated CSV data
+    rows.push([d.type,d.clientName,d.amount,toDateString(d.datetime),d.invoiceId||'',d.method||'']);
   });
   const csv = rows.map(r => r.map(c => `"${String(c||'').replace(/"/g,'""')}"`).join(',')).join('\n');
   downloadText('client_documents.csv', csv);
 }
+
 /* ===========================
    Reports
    =========================== */
@@ -1650,6 +1443,7 @@ function generateDailyReport(){
   html += `</tbody></table>`;
   document.getElementById('dailyReport').innerHTML = html; window._lastDailyReport = {date:day, rows:list};
 }
+
 function exportDailyCSV(){
   const data = window._lastDailyReport;
   if(!data){ alert('اعرض التقرير أولاً'); return; }
@@ -1658,6 +1452,7 @@ function exportDailyCSV(){
   const csv = rows.map(r => r.map(c=>`"${String(c||'').replace(/"/g,'""')}"`).join(',')).join('\n');
   downloadText(`daily_report_${data.date}.csv`, csv);
 }
+
 function generateMonthlyReport(){
   const m = document.getElementById('reportMonth').value;
   if(!m){ alert('اختر شهراً'); return; }
@@ -1673,6 +1468,7 @@ function generateMonthlyReport(){
   document.getElementById('monthlyReport').innerHTML = html;
   window._lastMonthlyReport = {month:m, rows:list};
 }
+
 function exportMonthlyCSV(){
   const data = window._lastMonthlyReport;
   if(!data){ alert('اعرض التقرير أولاً'); return; }
@@ -1681,6 +1477,7 @@ function exportMonthlyCSV(){
   const csv = rows.map(r => r.map(c=>`"${String(c||'').replace(/"/g,'""')}"`).join(',')).join('\n');
   downloadText(`monthly_report_${data.month}.csv`, csv);
 }
+
 /* ===========================
    Init
    =========================== */
